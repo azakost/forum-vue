@@ -6,6 +6,8 @@ import {
   HelpCircleIcon,
 } from "vue-feather-icons";
 
+import { host } from "../config";
+
 export default {
   name: "Layout",
   components: {
@@ -13,6 +15,11 @@ export default {
     BellIcon,
     BookOpenIcon,
     HelpCircleIcon,
+  },
+  data() {
+    return {
+      url: host,
+    };
   },
 };
 </script>
@@ -45,14 +52,19 @@ export default {
 
     <div class="basic">
       <div class="login">
-        <router-link to="/profile" v-if="this.$store.getters.LOG == 'true'">
-          <img src="" />
+        <router-link to="/profile" v-if="this.$store.getters.USER != ''">
+          <img :src="url + '/avatars/' + this.$store.getters.ID + '.jpg'" />
+
           <li>
             <ul>
-              Azamat
+              {{
+                this.$store.getters.NAME
+              }}
             </ul>
             <ul>
-              @azakost
+              @{{
+                this.$store.getters.USER
+              }}
             </ul>
           </li>
         </router-link>
@@ -84,7 +96,7 @@ main {
   max-width: calc(275px + 598px + 392px);
   position: relative;
   margin: 0 auto;
-  height: 100vh;
+  height: var(--fullH);
   display: grid;
 }
 

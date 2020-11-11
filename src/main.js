@@ -10,3 +10,11 @@ new Vue({
   router,
   render: (h) => h(App),
 }).$mount("#app");
+
+// Setting up a "real 100vh" height for mobile browsers
+changeHeight();
+function changeHeight() {
+  var vh = window.innerHeight * 0.01 * 100;
+  document.documentElement.style.setProperty("--fullH", `${vh}px`);
+}
+window.addEventListener("resize", changeHeight);

@@ -10,17 +10,33 @@ const inStore = (name, defval) => {
 
 export const store = new Vuex.Store({
   state: {
-    login: inStore("login", "false"),
+    id: inStore("id", 0),
+    username: inStore("username", ""),
+    fullname: inStore("fullname", ""),
   },
   getters: {
-    LOG: (state) => {
-      return state.login;
+    ID: (state) => {
+      return state.id;
+    },
+    USER: (state) => {
+      return state.username;
+    },
+    NAME: (state) => {
+      return state.fullname;
     },
   },
   mutations: {
-    SET_LOG: (state, payload) => {
-      localStorage.setItem("login", payload);
-      state.login = payload;
+    SET_ID: (state, payload) => {
+      localStorage.setItem("id", payload);
+      state.id = payload;
+    },
+    SET_USER: (state, payload) => {
+      localStorage.setItem("username", payload);
+      state.username = payload;
+    },
+    SET_NAME: (state, payload) => {
+      localStorage.setItem("fullname", payload);
+      state.fullname = payload;
     },
   },
   actions: {},
