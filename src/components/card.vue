@@ -1,10 +1,14 @@
 <template>
   <div class="card">
-    <div><a href="#">Ava</a></div>
-    <a href="#">
+    <div>
+      <a v-bind:href="'/users/' + uid">
+        <img v-bind:src="avatar" />
+      </a>
+    </div>
+    <a v-bind:href="'/posts/' + pid">
       <div class="head">
-        <span>@username</span>
-        <small>timeago</small>
+        <span>@{{ username }}</span>
+        <small>{{ time }}</small>
       </div>
       <p>{{ text }}</p>
       <div class="foot">
@@ -17,7 +21,7 @@
           &nbsp; &nbsp;
           <div>
             <message-square-icon class="icon" />
-            <small>2</small>
+            <small>{{ messages }}</small>
           </div>
         </div>
       </div>
@@ -33,6 +37,14 @@
   column-gap: 16px;
   display: grid;
   padding: 16px;
+}
+
+img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 50%;
 }
 
 .head,
@@ -94,9 +106,17 @@ export default {
   },
   props: {
     avatar: String,
-    pid: Number,
+    uid: {
+      type: Number,
+      default: 0,
+    },
+    pid: {
+      type: Number,
+      default: 0,
+    },
     username: String,
     text: String,
+    time: Number,
     hearts: {
       type: Number,
       default: 0,

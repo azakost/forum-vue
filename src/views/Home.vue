@@ -32,7 +32,10 @@ export default {
       <filter-icon class="icon" v-on:click="test" />
     </Head>
     <div class="home">
-      <Card text="Lorem ipsum dolor" />
+      <Card
+        text="Lorem ipsum dolor"
+        avatar="http://localhost:8080/avatars/1.jpg"
+      />
     </div>
   </div>
 </template>
