@@ -2,26 +2,28 @@
   <div class="card">
     <div>
       <a v-bind:href="'/users/' + uid">
-        <img v-bind:src="avatar" />
+        <img v-bind:src="server + '/avatars/' + uid + '.jpg'" />
       </a>
     </div>
     <a v-bind:href="'/posts/' + pid">
       <div class="head">
         <span>@{{ username }}</span>
-        <small>{{ time }}</small>
+        <small>{{ created }}</small>
       </div>
       <p>{{ text }}</p>
       <div class="foot">
-        <div>hash</div>
+        <div class="cats">
+          <small v-for="c in categories" v-bind:key="c.Id">#{{ c.Name }}</small>
+        </div>
         <div class="stats">
           <div>
             <heart-icon class="icon" />
-            <small>{{ hearts }}</small>
+            <small>{{ likes - dislikes }}</small>
           </div>
           &nbsp; &nbsp;
           <div>
             <message-square-icon class="icon" />
-            <small>{{ messages }}</small>
+            <small>{{ comments }}</small>
           </div>
         </div>
       </div>
@@ -92,11 +94,16 @@ small {
 small {
   font-size: 11px;
 }
+
+.cats > small {
+  margin-right: 8px;
+}
 </style>
 
 
 <script>
 import { MessageSquareIcon, HeartIcon } from "vue-feather-icons";
+import { host } from "../config";
 
 export default {
   name: "Card",
@@ -104,27 +111,22 @@ export default {
     HeartIcon,
     MessageSquareIcon,
   },
+  data: () => {
+    return {
+      server: host,
+    };
+  },
   props: {
-    avatar: String,
-    uid: {
-      type: Number,
-      default: 0,
-    },
-    pid: {
-      type: Number,
-      default: 0,
-    },
+    pid: Number,
+    created: Number,
+    uid: Number,
     username: String,
     text: String,
-    time: Number,
-    hearts: {
-      type: Number,
-      default: 0,
-    },
-    messages: {
-      type: Number,
-      default: 0,
-    },
+    likes: Number,
+    dislikes: Number,
+    comments: Number,
+    reaction: String,
+    categories: Array,
   },
 };
 </script>

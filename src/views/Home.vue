@@ -4,6 +4,7 @@ import Head from "@/components/head.vue";
 import Card from "@/components/card.vue";
 
 import axios from "axios";
+import { host } from "../config";
 
 export default {
   name: "Home",
@@ -14,15 +15,14 @@ export default {
   },
   data: () => {
     return {
-      text: "Placeholder",
-      info: null,
+      posts: null,
     };
   },
   methods: {},
   mounted() {
     axios
-      .get("http://localhost:8080/api/posts")
-      .then((response) => (this.info = response.data));
+      .get(host + "/api/posts")
+      .then((response) => (this.posts = response.data));
   },
 };
 </script>
@@ -33,15 +33,7 @@ export default {
       <filter-icon class="icon" />
     </Head>
     <div class="home">
-      <Card
-        v-for="item in info"
-        v-bind:text="item.text"
-        v-bind:username="item.username"
-        v-bind:hearts="item.likes - item.dislikes"
-        v-bind:messages="item.comments"
-        v-bind:key="item.pid"
-        v-bind:avatar="'http://localhost:8080/avatars/' + item.uid + '.jpg'"
-      />
+      <Card v-for="post in posts" v-bind:key="post.pid" v-bind="post" />
     </div>
   </div>
 </template>
