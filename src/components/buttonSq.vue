@@ -8,11 +8,16 @@ export default {
       default: true,
     },
   },
+  methods: {
+    click() {
+      this.$emit("click");
+    },
+  },
 };
 </script>
 
 <template>
-  <button :disabled="disabled">
+  <button :disabled="disabled" @click="click">
     {{ name }}
   </button>
 </template>

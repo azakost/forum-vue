@@ -14,8 +14,7 @@ What I have studied?
 - [x] API fetching (Axios) and list rendering
 - [x] Mount
 - [x] Input, Textfield, Radio Buttons, Checkbox, Select, Contenteditable value binding?
-- [x] Input event dispatcher (emit)
-- [ ] Click event dispatcher
+- [x] Event dispatcher (emit)
 - [ ] Unmount
 - [ ] Await logic?
 - [ ] Conditional component swithing?
