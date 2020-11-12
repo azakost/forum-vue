@@ -3,7 +3,7 @@ import { FilterIcon } from "vue-feather-icons";
 import Head from "@/components/head.vue";
 import Card from "@/components/card.vue";
 
-// import { get } from "../config";
+import axios from "axios";
 
 export default {
   name: "Home",
@@ -15,26 +15,32 @@ export default {
   data: () => {
     return {
       text: "Placeholder",
+      info: null,
     };
   },
-  methods: {
-    test: () => {
-      alert("yes");
-    },
+  methods: {},
+  mounted() {
+    axios
+      .get("http://localhost:8080/api/posts")
+      .then((response) => (this.info = response.data));
   },
-  mounted() {},
 };
 </script>
 
 <template>
   <div>
     <Head>
-      <filter-icon class="icon" v-on:click="test" />
+      <filter-icon class="icon" />
     </Head>
     <div class="home">
       <Card
-        text="Lorem ipsum dolor"
-        avatar="http://localhost:8080/avatars/1.jpg"
+        v-for="item in info"
+        v-bind:text="item.text"
+        v-bind:username="item.username"
+        v-bind:hearts="item.likes - item.dislikes"
+        v-bind:messages="item.comments"
+        v-bind:key="item.pid"
+        v-bind:avatar="'http://localhost:8080/avatars/' + item.uid + '.jpg'"
       />
     </div>
   </div>
