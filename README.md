@@ -2,7 +2,7 @@
 
 Project made for Vue.js studies.
 
-What I Studied?
+What I have studied?
 
 - [x] Vue CLI (installation & general use)
 - [x] Install & general use of router (Vue.Router)
@@ -13,9 +13,10 @@ What I Studied?
 - [x] If-else logic - conditional rendering
 - [x] API fetching (Axios) and list rendering
 - [x] Mount
+- [x] Input, Textfield, Radio Buttons, Checkbox, Select, Contenteditable value binding?
+- [x] Input event dispatcher (emit)
+- [ ] Click event dispatcher
 - [ ] Unmount
 - [ ] Await logic?
-- [ ] Event dispatcher?
 - [ ] Conditional component swithing?
-- [ ] Input, Textfield, Radio Buttons, Checkbox, Select, Contenteditable value binding?
 - [ ] Reactivity: update arrays & objects?
