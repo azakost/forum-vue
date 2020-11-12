@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
+import Post from "../views/Post.vue";
 
 Vue.use(VueRouter);
 
@@ -15,6 +16,11 @@ const routes = [
     path: "/login",
     name: "Вход в систему",
     component: Login,
+  },
+  {
+    path: "/posts/:pid",
+    name: "Вопрос",
+    component: Post,
   },
 ];
 

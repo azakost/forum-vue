@@ -1,21 +1,21 @@
 <template>
-  <div class="card">
+  <div :class="short ? 'card hover' : 'card'">
     <div>
       <a v-bind:href="'/users/' + uid">
         <img v-bind:src="server + '/avatars/' + uid + '.jpg'" />
       </a>
     </div>
-    <a v-bind:href="'/posts/' + pid">
+    <a v-bind:href="short ? '/posts/' + pid : null">
       <div class="head">
         <span>@{{ username }}</span>
-        <small>{{ formatDate(created) }}</small>
+        <small v-if="short">{{ formatDate(created) }}</small>
       </div>
       <p>{{ text }}</p>
       <div class="foot">
         <div class="cats">
           <small v-for="c in categories" v-bind:key="c.Id">#{{ c.Name }}</small>
         </div>
-        <div class="stats">
+        <div class="stats" v-if="short">
           <div>
             <heart-icon class="icon" />
             <small>{{ likes - dislikes }}</small>
@@ -41,7 +41,7 @@
   padding: 16px;
 }
 
-.card:hover {
+.hover:hover {
   background: var(--input-color);
 }
 
@@ -163,6 +163,10 @@ export default {
     comments: Number,
     reaction: String,
     categories: Array,
+    short: {
+      type: Boolean,
+      default: true,
+    },
   },
 };
 </script>
