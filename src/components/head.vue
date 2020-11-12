@@ -4,7 +4,7 @@
       <arrow-left-icon class="icon back" />
       <h4>{{ $route.name }}</h4>
     </div>
-    <div>
+    <div :class="secondLevel ? 'second' : ''">
       <slot />
     </div>
   </header>
@@ -17,6 +17,12 @@ export default {
   name: "Head",
   components: {
     ArrowLeftIcon,
+  },
+  props: {
+    secondLevel: {
+      type: Boolean,
+      default: true,
+    },
   },
 };
 </script>
@@ -36,7 +42,7 @@ header > div {
   display: flex;
 }
 
-header > div:last-child {
+header > .second {
   display: none;
 }
 
@@ -46,7 +52,7 @@ header > div:last-child {
 }
 
 @media only screen and (max-width: 1078px) {
-  header > div:last-child {
+  header > .second {
     display: block;
   }
 }
