@@ -41,6 +41,10 @@
   padding: 16px;
 }
 
+.card:hover {
+  background: var(--input-color);
+}
+
 img {
   width: 40px;
   height: 40px;
