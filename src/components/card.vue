@@ -8,7 +8,7 @@
     <a v-bind:href="'/posts/' + pid">
       <div class="head">
         <span>@{{ username }}</span>
-        <small>{{ created }}</small>
+        <small>{{ formatDate(created) }}</small>
       </div>
       <p>{{ text }}</p>
       <div class="foot">
@@ -119,6 +119,38 @@ export default {
     return {
       server: host,
     };
+  },
+  methods: {
+    formatDate: (secs) => {
+      let t = new Date(1970, 0, 1);
+      t.setSeconds(secs);
+      let x = new Date();
+      let timezone = -x.getTimezoneOffset() / 60;
+      t.setHours(t.getHours() + timezone);
+      let diff = new Date() - t;
+      let sec = Math.floor(diff / 1000);
+      if (sec < 2) {
+        return "сейчас";
+      }
+
+      if (sec < 60) {
+        return sec + " сек. назад";
+      }
+
+      let min = Math.floor(diff / 60000);
+      if (min < 60) {
+        return min + " мин. назад";
+      }
+      let d = t;
+      d = [
+        "0" + d.getDate(),
+        "0" + (d.getMonth() + 1),
+        "" + d.getFullYear(),
+        "0" + d.getHours(),
+        "0" + d.getMinutes(),
+      ].map((component) => component.slice(-2));
+      return d.slice(0, 3).join(".") + " " + d.slice(3).join(":");
+    },
   },
   props: {
     pid: Number,
