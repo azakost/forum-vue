@@ -15,7 +15,5 @@ What I have studied?
 - [x] Mount
 - [x] Input, Textfield, Radio Buttons, Checkbox, Select, Contenteditable value binding?
 - [x] Event dispatcher (emit)
-- [ ] Unmount
-- [ ] Await logic?
-- [ ] Conditional component switching?
-- [ ] Reactivity: update arrays & objects?
+- [x] Reactivity: update arrays & objects?
+- [ ] Conditional component switching - **_haven't found such feature_**
