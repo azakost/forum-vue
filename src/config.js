@@ -27,3 +27,14 @@ export const post = async (url, body) => {
     // Error handlers
   }
 };
+
+export const put = async (url, body) => {
+  let res = await fetch(host + "/api/" + url, {
+    method: "POST",
+    body: JSON.stringify(body),
+    credentials: "include",
+  });
+  if (!res.ok) {
+    //errors
+  }
+};

@@ -76,4 +76,11 @@ p {
 .icon {
   cursor: pointer;
 }
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
 </style>

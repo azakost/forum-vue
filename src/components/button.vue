@@ -1,9 +1,8 @@
 <script>
 export default {
-  name: "buttonSq",
+  name: "Button",
   props: {
-    name: String,
-    disable: {
+    disabled: {
       type: Boolean,
       default: true,
     },
@@ -18,7 +17,7 @@ export default {
 
 <template>
   <button :disabled="disabled" @click="click">
-    {{ name }}
+    <slot />
   </button>
 </template>
 

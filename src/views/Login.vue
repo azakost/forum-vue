@@ -1,7 +1,7 @@
 <script>
 import Head from "../components/head.vue";
 import Input from "../components/input.vue";
-import Button from "../components/buttonSq.vue";
+import Button from "../components/button.vue";
 import { UserPlusIcon } from "vue-feather-icons";
 import { post } from "../config";
 
@@ -41,7 +41,7 @@ export default {
     <div class="form">
       <Input label="Имя пользователя" type="text" v-model="user.username" />
       <Input label="Пароль" type="password" v-model="user.password" />
-      <Button name="Войти" class="margin-top" v-on:click="login" />
+      <Button v-on:click="login" :disabled="false">Войти</Button>
     </div>
   </div>
 </template>
@@ -55,7 +55,7 @@ export default {
   padding: 15px 40px 0;
 }
 
-.margin-top {
+Button {
   margin-top: 16px;
 }
 </style>
