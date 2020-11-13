@@ -1,6 +1,7 @@
 <script>
 import Head from "../components/head.vue";
 import { LogOutIcon } from "vue-feather-icons";
+import { get } from "../config";
 
 export default {
   name: "Profile",
@@ -9,12 +10,13 @@ export default {
     LogOutIcon,
   },
   methods: {
-    logout() {
+    async logout() {
       localStorage.clear();
       this.$store.commit("SET_ID", 0);
       this.$store.commit("SET_USER", "");
       this.$store.commit("SET_NAME", "");
       this.$router.push({ path: "login" });
+      await get("logout");
     },
   },
 };

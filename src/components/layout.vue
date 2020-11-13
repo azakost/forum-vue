@@ -18,7 +18,7 @@ export default {
   },
   data() {
     return {
-      url: ava(this.$store.getters.ID),
+      url: ava,
     };
   },
 };
@@ -52,7 +52,7 @@ export default {
     <div class="basic">
       <div class="login">
         <router-link to="/profile" v-if="this.$store.getters.USER != ''">
-          <img :src="url" />
+          <img :src="url(this.$store.getters.ID)" />
 
           <li>
             <ul>

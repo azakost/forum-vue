@@ -2,7 +2,6 @@
 import { FilterIcon } from "vue-feather-icons";
 import Head from "../components/head.vue";
 import Card from "../components/card.vue";
-
 import { get } from "../config";
 
 export default {
@@ -26,7 +25,7 @@ export default {
 
 <template>
   <div>
-    <Head parent="true">
+    <Head :parent="true">
       <filter-icon class="icon" />
     </Head>
     <div class="home">

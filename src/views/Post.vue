@@ -21,7 +21,7 @@ export default {
   },
   data: () => {
     return {
-      post: null,
+      post: {},
     };
   },
   async mounted() {
@@ -50,9 +50,9 @@ export default {
         <edit-icon class="icon" v-else />
       </div>
       <div :class="post.Reaction">
-        <thumbs-up-icon class="icon" />
+        <thumbs-up-icon class="icon thumbs-up" />
         <span>{{ post.Likes - post.Dislikes }}</span>
-        <thumbs-down-icon class="icon" />
+        <thumbs-down-icon class="icon thumbs-down" />
       </div>
     </div>
   </div>
