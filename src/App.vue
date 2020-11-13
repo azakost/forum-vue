@@ -1,11 +1,3 @@
-<template>
-  <div id="app">
-    <Layout>
-      <router-view />
-    </Layout>
-  </div>
-</template>
-
 <script>
 import Layout from "./components/layout.vue";
 
@@ -17,6 +9,13 @@ export default {
 };
 </script>
 
+<template>
+  <div id="app">
+    <Layout>
+      <router-view />
+    </Layout>
+  </div>
+</template>
 
 <style>
 :root {

@@ -17,5 +17,5 @@ What I have studied?
 - [x] Event dispatcher (emit)
 - [ ] Unmount
 - [ ] Await logic?
-- [ ] Conditional component swithing?
+- [ ] Conditional component switching?
 - [ ] Reactivity: update arrays & objects?

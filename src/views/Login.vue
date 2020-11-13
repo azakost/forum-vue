@@ -3,6 +3,7 @@ import Head from "../components/head.vue";
 import Input from "../components/input.vue";
 import Button from "../components/buttonSq.vue";
 import { UserPlusIcon } from "vue-feather-icons";
+import { post } from "../config";
 
 export default {
   name: "Login",
@@ -14,15 +15,18 @@ export default {
   },
   data: () => {
     return {
-      username: "",
-      password: "",
+      user: {
+        username: "",
+        password: "",
+      },
     };
   },
   methods: {
-    login() {
-      this.$store.commit("SET_ID", 1);
-      this.$store.commit("SET_USER", "azakost");
-      this.$store.commit("SET_NAME", "Azamat Alimbayev");
+    async login() {
+      let res = await post("login", this.user);
+      this.$store.commit("SET_ID", res.userID);
+      this.$store.commit("SET_USER", res.username);
+      this.$store.commit("SET_NAME", res.fullname);
       this.$router.push({ path: "profile" });
     },
   },
@@ -31,12 +35,12 @@ export default {
 
 <template>
   <div>
-    <Head v-bind:secondLevel="false">
+    <Head>
       <user-plus-icon class="icon" v-on:click="$router.push('register')" />
     </Head>
     <div class="form">
-      <Input label="Имя пользователя" type="text" v-model="username" />
-      <Input label="Пароль" type="password" v-model="password" />
+      <Input label="Имя пользователя" type="text" v-model="user.username" />
+      <Input label="Пароль" type="password" v-model="user.password" />
       <Button name="Войти" class="margin-top" v-on:click="login" />
     </div>
   </div>

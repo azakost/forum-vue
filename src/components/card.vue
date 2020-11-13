@@ -1,11 +1,77 @@
+<script>
+import { MessageSquareIcon, HeartIcon } from "vue-feather-icons";
+import { ava } from "../config";
+
+export default {
+  name: "Card",
+  components: {
+    HeartIcon,
+    MessageSquareIcon,
+  },
+  data: () => {
+    return {
+      url: ava,
+    };
+  },
+  methods: {
+    formatDate: (secs) => {
+      let t = new Date(1970, 0, 1);
+      t.setSeconds(secs);
+      let x = new Date();
+      let timezone = -x.getTimezoneOffset() / 60;
+      t.setHours(t.getHours() + timezone);
+      let diff = new Date() - t;
+      let sec = Math.floor(diff / 1000);
+      if (sec < 2) {
+        return "сейчас";
+      }
+
+      if (sec < 60) {
+        return sec + " сек. назад";
+      }
+
+      let min = Math.floor(diff / 60000);
+      if (min < 60) {
+        return min + " мин. назад";
+      }
+      let d = t;
+      d = [
+        "0" + d.getDate(),
+        "0" + (d.getMonth() + 1),
+        "" + d.getFullYear(),
+        "0" + d.getHours(),
+        "0" + d.getMinutes(),
+      ].map((component) => component.slice(-2));
+      return d.slice(0, 3).join(".") + " " + d.slice(3).join(":");
+    },
+  },
+  props: {
+    pid: Number,
+    created: Number,
+    uid: Number,
+    username: String,
+    text: String,
+    likes: Number,
+    dislikes: Number,
+    comments: Number,
+    reaction: String,
+    categories: Array,
+    short: {
+      type: Boolean,
+      default: true,
+    },
+  },
+};
+</script>
+
 <template>
   <div :class="short ? 'card hover' : 'card'">
     <div>
-      <a v-bind:href="'/users/' + uid">
-        <img v-bind:src="server + '/avatars/' + uid + '.jpg'" />
+      <a :href="'/users/' + uid">
+        <img :src="url(uid)" />
       </a>
     </div>
-    <a v-bind:href="short ? '/posts/' + pid : null">
+    <a :href="short ? '/posts/' + pid : null">
       <div class="head">
         <span>@{{ username }}</span>
         <small v-if="short">{{ formatDate(created) }}</small>
@@ -13,7 +79,7 @@
       <p>{{ text }}</p>
       <div class="foot">
         <div class="cats">
-          <small v-for="c in categories" v-bind:key="c.Id">#{{ c.Name }}</small>
+          <small v-for="c in categories" :key="c.Id">#{{ c.Name }}</small>
         </div>
         <div class="stats" v-if="short">
           <div>
@@ -30,7 +96,6 @@
     </a>
   </div>
 </template>
-
 
 <style scoped>
 .card {
@@ -104,69 +169,3 @@ small {
 }
 </style>
 
-
-<script>
-import { MessageSquareIcon, HeartIcon } from "vue-feather-icons";
-import { host } from "../config";
-
-export default {
-  name: "Card",
-  components: {
-    HeartIcon,
-    MessageSquareIcon,
-  },
-  data: () => {
-    return {
-      server: host,
-    };
-  },
-  methods: {
-    formatDate: (secs) => {
-      let t = new Date(1970, 0, 1);
-      t.setSeconds(secs);
-      let x = new Date();
-      let timezone = -x.getTimezoneOffset() / 60;
-      t.setHours(t.getHours() + timezone);
-      let diff = new Date() - t;
-      let sec = Math.floor(diff / 1000);
-      if (sec < 2) {
-        return "сейчас";
-      }
-
-      if (sec < 60) {
-        return sec + " сек. назад";
-      }
-
-      let min = Math.floor(diff / 60000);
-      if (min < 60) {
-        return min + " мин. назад";
-      }
-      let d = t;
-      d = [
-        "0" + d.getDate(),
-        "0" + (d.getMonth() + 1),
-        "" + d.getFullYear(),
-        "0" + d.getHours(),
-        "0" + d.getMinutes(),
-      ].map((component) => component.slice(-2));
-      return d.slice(0, 3).join(".") + " " + d.slice(3).join(":");
-    },
-  },
-  props: {
-    pid: Number,
-    created: Number,
-    uid: Number,
-    username: String,
-    text: String,
-    likes: Number,
-    dislikes: Number,
-    comments: Number,
-    reaction: String,
-    categories: Array,
-    short: {
-      type: Boolean,
-      default: true,
-    },
-  },
-};
-</script>

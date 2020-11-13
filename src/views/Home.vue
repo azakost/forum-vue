@@ -1,10 +1,9 @@
 <script>
 import { FilterIcon } from "vue-feather-icons";
-import Head from "@/components/head.vue";
-import Card from "@/components/card.vue";
+import Head from "../components/head.vue";
+import Card from "../components/card.vue";
 
-import axios from "axios";
-import { host } from "../config";
+import { get } from "../config";
 
 export default {
   name: "Home",
@@ -19,17 +18,15 @@ export default {
     };
   },
   methods: {},
-  mounted() {
-    axios
-      .get(host + "/api/posts")
-      .then((response) => (this.posts = response.data));
+  async mounted() {
+    this.posts = await get("posts");
   },
 };
 </script>
 
 <template>
   <div>
-    <Head>
+    <Head parent="true">
       <filter-icon class="icon" />
     </Head>
     <div class="home">

@@ -1,14 +1,13 @@
 <script>
 import Card from "../components/card.vue";
 import Head from "../components/head.vue";
-import axios from "axios";
+import { get } from "../config";
 import {
   ThumbsUpIcon,
   ThumbsDownIcon,
   FlagIcon,
   EditIcon,
 } from "vue-feather-icons";
-import { host } from "../config";
 
 export default {
   name: "Post",
@@ -25,10 +24,8 @@ export default {
       post: null,
     };
   },
-  mounted() {
-    axios
-      .get(host + "/api/post?postID=" + this.$route.params.pid)
-      .then((response) => (this.post = response.data));
+  async mounted() {
+    this.post = await get("post?postID=" + this.$route.params.pid);
   },
 };
 </script>
@@ -37,11 +34,11 @@ export default {
   <div>
     <Head />
     <Card
-      v-bind:text="post.Title"
-      v-bind:uid="post.AuthorID"
-      v-bind:username="post.Username"
-      v-bind:categories="post.Categories"
-      v-bind:short="false"
+      :text="post.Title"
+      :uid="post.AuthorID"
+      :username="post.Username"
+      :categories="post.Categories"
+      :short="false"
     />
     <div class="long" v-html="post.Text" v-if="post.Text != ''"></div>
     <div class="actions">

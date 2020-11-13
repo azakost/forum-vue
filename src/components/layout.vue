@@ -6,7 +6,7 @@ import {
   HelpCircleIcon,
 } from "vue-feather-icons";
 
-import { host } from "../config";
+import { ava } from "../config";
 
 export default {
   name: "Layout",
@@ -18,12 +18,11 @@ export default {
   },
   data() {
     return {
-      url: host,
+      url: ava(this.$store.getters.ID),
     };
   },
 };
 </script>
-
 
 <template>
   <main>
@@ -53,7 +52,7 @@ export default {
     <div class="basic">
       <div class="login">
         <router-link to="/profile" v-if="this.$store.getters.USER != ''">
-          <img :src="url + '/avatars/' + this.$store.getters.ID + '.jpg'" />
+          <img :src="url" />
 
           <li>
             <ul>

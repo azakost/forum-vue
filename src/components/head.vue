@@ -1,15 +1,3 @@
-<template>
-  <header>
-    <div>
-      <arrow-left-icon class="icon back" />
-      <h4>{{ $route.name }}</h4>
-    </div>
-    <div :class="secondLevel ? 'second' : ''">
-      <slot />
-    </div>
-  </header>
-</template>
-
 <script>
 import { ArrowLeftIcon } from "vue-feather-icons";
 
@@ -19,13 +7,29 @@ export default {
     ArrowLeftIcon,
   },
   props: {
-    secondLevel: {
+    parent: {
       type: Boolean,
-      default: true,
+      default: false,
     },
   },
 };
 </script>
+
+<template>
+  <header>
+    <div>
+      <arrow-left-icon
+        class="icon back"
+        v-if="!parent"
+        v-on:click="$router.back()"
+      />
+      <h4>{{ $route.name }}</h4>
+    </div>
+    <div :class="parent ? 'second' : ''">
+      <slot />
+    </div>
+  </header>
+</template>
 
 <style scoped>
 header {

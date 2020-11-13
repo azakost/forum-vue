@@ -7,33 +7,40 @@ import Post from "../views/Post.vue";
 
 Vue.use(VueRouter);
 
-const routes = [
-  {
-    path: "/",
-    name: "Вопросы",
-    component: Home,
-  },
-  {
-    path: "/login",
-    name: "Вход в систему",
-    component: Login,
-  },
-  {
-    path: "/profile",
-    name: "Профиль",
-    component: Profile,
-  },
-  {
-    path: "/posts/:pid",
-    name: "Вопрос",
-    component: Post,
-  },
-];
-
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes,
+  routes: [
+    {
+      path: "/",
+      name: "Вопросы",
+      component: Home,
+    },
+    {
+      path: "/login",
+      name: "Вход в систему",
+      component: Login,
+      props: {
+        parent: false,
+      },
+    },
+    {
+      path: "/profile",
+      name: "Профиль",
+      component: Profile,
+      props: {
+        parent: false,
+      },
+    },
+    {
+      path: "/posts/:pid",
+      name: "Вопрос",
+      component: Post,
+      props: {
+        parent: false,
+      },
+    },
+  ],
 });
 
 export default router;

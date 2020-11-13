@@ -22,7 +22,7 @@ export default {
 
 <template>
   <div>
-    <Head v-bind:secondLevel="false">
+    <Head>
       <log-out-icon class="icon" v-on:click="logout" />
     </Head>
   </div>
